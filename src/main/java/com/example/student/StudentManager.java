@@ -18,9 +18,7 @@ public class StudentManager {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/list")
     public List<Student> getStudentList() {
-        List<Student> students = new ArrayList<>();
-        students = DatabaseManager.getReadOnlyJdbi().withExtension(StudentDao.class, StudentDao::findAll);
-        return students;
+        return DatabaseManager.getReadOnlyJdbi().withExtension(StudentDao.class, StudentDao::findAll);
     }
 
 
