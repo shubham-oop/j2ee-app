@@ -12,7 +12,7 @@ public class StudentManagerTest {
 
     @BeforeEach
     public void setup() {
-        student = new Student(null, 20, "Shubham", 3, 101, "Delhi", "shubham@example.com");
+        student = new Student(null, 20, "Shubham", 3, 101L, "Delhi", "shubham@example.com");
     }
 
     @Test

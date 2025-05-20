@@ -9,8 +9,8 @@ import org.postgresql.util.PSQLException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Path("/student")
 public class StudentManager {
@@ -23,14 +23,13 @@ public class StudentManager {
 
 
     @GET
-    @Path("/{roll_number}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getStudentByRollNumber(@PathParam("roll_number") Integer roll_number) {
+    public Response getStudentByRollNumber(@QueryParam("roll_number") Integer roll_number) {
         try {
             Student student = DatabaseManager.getReadOnlyJdbi().withExtension(StudentDao.class,
                     dao -> dao.findByRollNumber(roll_number));
 
-            if (student != null) {
+            if (Objects.nonNull(student)) {
                 return Response.ok(student).build();
             } else {
                 return Response.status(Response.Status.NOT_FOUND)
