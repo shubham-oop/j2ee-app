@@ -12,7 +12,7 @@ import java.util.List;
 @RegisterRowMapper(StudentRowMapper.class)
 public interface StudentDao {
 
-    @SqlQuery("SELECT * FROM students")
+    @SqlQuery("SELECT * FROM students ORDER BY roll_number ASC")
     List<Student> findAll();
 //
 //    @SqlQuery("SELECT * FROM student WHERE rollNumber IN (<rollNumbers>)")
@@ -27,9 +27,10 @@ public interface StudentDao {
 //    @RegisterBeanMapper(Student.class)
 //    Student findByRollNumber(@Bind("rollNumber") int rollNumber);
 
-    @SqlUpdate("INSERT INTO students (roll_number, name, age, phone_number, address, email) VALUES (:roll_number, :name, :age, :phone_number, :address, :email)")
+    @SqlUpdate("INSERT INTO students (roll_number, name, age, phone_number, address, email, class) " +
+            "VALUES (:roll_number, :name, :age, :phone_number, :address, :email, CAST(:classDbValue AS student_class))")
     @GetGeneratedKeys
-    int insertStudent(@BindBean Student student);
+    int insertStudent(@BindBean Student student, @Bind("classDbValue") String classDbValue);
 
 //    @SqlBatch("INSERT INTO student (rollNumber, name, age, grade, address, email) VALUES (:rollNumber, :name, :age, :grade, :address, :email)")
 //    void insertStudents(@BindBean List<Student> students);

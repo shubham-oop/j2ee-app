@@ -30,4 +30,8 @@ public class Student {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String address;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "class", nullable = false)
+    private StudentClass studentClass;
 }
