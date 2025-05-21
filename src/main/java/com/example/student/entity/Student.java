@@ -15,6 +15,7 @@ import javax.persistence.*;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Integer id;
 
     @Column(unique = true, nullable = false)
@@ -29,4 +30,8 @@ public class Student {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String address;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "class", nullable = false)
+    private StudentClass studentClass;
 }
